@@ -2,7 +2,7 @@
 
 An experimental, local-first connector that lets an MCP-compatible assistant inspect the active SketchUp desktop model and create simple 3D boxes using plain language. It combines a SketchUp Ruby extension with a small Python MCP server.
 
-**Early prototype:** not yet verified end to end in SketchUp or either assistant. It currently offers three tools: model information, a list of top-level groups, and an undoable rectangular solid. It does not provide general SketchUp command coverage, arbitrary Ruby execution, rendering, or SketchUp for Web support.
+**Early prototype:** an MCP client has discovered and called the server against a simulated SketchUp peer, but it has not yet been verified end to end in SketchUp or either assistant. It currently offers three tools: model information, a list of top-level groups, and an undoable rectangular solid. It does not provide general SketchUp command coverage, arbitrary Ruby execution, rendering, or SketchUp for Web support.
 
 ## Requirements
 
@@ -47,7 +47,7 @@ On Windows use the full path to `.venv\\Scripts\\python.exe`, with backslashes e
 
 ## 4. Connect ChatGPT
 
-Run `.venv/bin/python server.py --http` (on Windows, `.venv\Scripts\python.exe server.py --http`). The MCP endpoint listens **only** on `http://127.0.0.1:8765/mcp`. Localhost is not directly reachable by ChatGPT on the web. Set up an [OpenAI Secure MCP Tunnel](https://developers.openai.com/api/docs/guides/tools-connectors-mcp) for this endpoint and add the tunnel as a custom MCP server in ChatGPT, following [OpenAI's connection instructions](https://developers.openai.com/api/docs/guides/custom-mcp-server). This requires an eligible ChatGPT environment and tunnel setup. The tunnel flow has not been verified with this project. Keep access private; do not expose this unauthenticated local endpoint to the internet.
+Run `.venv/bin/python server.py --http` (on Windows, `.venv\Scripts\python.exe server.py --http`). The MCP endpoint listens **only** on `http://127.0.0.1:8765/mcp`. Localhost is not directly reachable by ChatGPT on the web. Set up an [OpenAI Secure MCP Tunnel](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels) for this endpoint and add the tunnel as a custom MCP server in ChatGPT, following [OpenAI's connection instructions](https://developers.openai.com/api/docs/guides/custom-mcp-server). The tunnel requires an eligible OpenAI Platform organization, a tunnel ID, a runtime API key, the tunnel client, and appropriate workspace permissions. The tunnel flow has not been verified with this project. Keep access private; do not expose this unauthenticated local endpoint to the internet.
 
 ## Commands and units
 
@@ -64,6 +64,6 @@ All commands operate on the active model's root, including while another group i
 - If the assistant times out, ensure SketchUp desktop is running, a model is open, and the extension's Status menu appears. A modal dialog can prevent timers from running.
 - If Claude does not see the tools, verify the JSON and absolute paths and restart Claude. Consult its server logs.
 - If an RBZ is rejected, verify its root contains the Ruby loader and matching folder, not a parent folder.
-- This prototype has not been verified on Windows or with multiple accounts. Its Python tests use a simulated bridge, not SketchUp.
+- This prototype has not been verified on Windows or with multiple accounts. Its protocol tests use a simulated bridge, not SketchUp. The real MCP SDK was tested on macOS with Python 3.12 and MCP 1.30.0.
 
 Not affiliated with or endorsed by Trimble, SketchUp, OpenAI, or Anthropic.
