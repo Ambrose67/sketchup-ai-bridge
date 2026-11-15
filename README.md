@@ -13,7 +13,7 @@ An experimental, local-first connector that lets an MCP-compatible assistant ins
 
 ## 1. Install the SketchUp extension
 
-Download this repository. Create a ZIP containing `rose_sketchup_bridge.rb` and the `rose_sketchup_bridge` folder directly at the archive root, both found inside `extension/`. Rename the ZIP to `sketchup-ai-bridge.rbz`. In SketchUp open **Window → Extension Manager → Install Extension**, select that RBZ, and enable it. SketchUp may warn that the extension is unsigned. Restart SketchUp and open a model. The **Extensions → SketchUp AI Bridge: Status** menu confirms the extension loaded.
+Download this repository, including the prebuilt `sketchup-ai-bridge.rbz`. In SketchUp open **Window → Extension Manager → Install Extension**, select that RBZ, and enable it. SketchUp may warn that the extension is unsigned. Restart SketchUp and open a model. The **Extensions → SketchUp AI Bridge: Status** menu confirms the extension loaded. Alternatively, create a ZIP containing `rose_sketchup_bridge.rb` and the `rose_sketchup_bridge` folder directly at the archive root, both found inside `extension/`, and rename the ZIP to `sketchup-ai-bridge.rbz`.
 
 Alternatively, on macOS or Linux, run `python3 build_extension.py`; on Windows run `py build_extension.py`. The resulting `sketchup-ai-bridge.rbz` is created in the project folder.
 
